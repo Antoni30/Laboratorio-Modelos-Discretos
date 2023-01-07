@@ -1,6 +1,3 @@
-#definimos el constante denominador de la ecuacion
-constDenominador=2
-
 def ingreso():
     """
     Funcion que permite pedir al usuario datos que usaremos en nuestro programa
@@ -18,26 +15,35 @@ def ingreso():
     while True:
         # permite capturar errores
         try:
-            # Pedimos por teclado la base mayor, base menor y la altura
-            baseM = int(
-                input("Ingresar Base Mayor del  trapezoide:\n"))
-            baseMe = int(
-                input("Ingresar Base Menor del trapezoide:\n"))
-            altura = int(
-                input("Ingresar la altura del trapezoide:\n"))
-
-            if baseM > 0 and baseMe > 0 and altura > 0:
+            radio = int(input("Ingrese radio de la circunferencia:\n"))
+            if radio > 0:
                 break
-            else:
-                print(
-                    "Algunos de los datos ingresados son menores a 0. Ingrese nuevamente los valores ")
         # si salta un error mandamos una respuesta
         except:
             # Mostramos informacion
             print("No es un numero alguno de los dos datos ingresados:")
             print("Vuelva a ingresar")
+
     # Valida que la letra este dentro del rango
-    return baseM, baseMe, altura
+    return radio
+
+
+def area(radio, pi):
+    """
+    Funcion que calcula el area de una circunferencia
+
+    Parametro
+    --------------------------------------------------
+    Radio y la contante pi 
+
+
+    Retorna
+    --------------------------------------------------
+    area de un ciruculo
+    """
+    # calculamos y devolvemos el resultado
+
+    return pi*(radio**2)
 
 
 def hacerNuevamente():
@@ -62,37 +68,20 @@ def hacerNuevamente():
     # retornamos un verdadero si no desea repetir
     return True
 
-def calculoDeArea(baseM,baseMe,altura):
-    """
-    Funcion que alcual el area de un trapezoide
-
-    Parametros
-    -------------------------------------------------------
-    Base Mayor, Base Menor y la altura de un trapezoide
-
-    Retorna
-    --------------------------------------------------------
-    Retorna el area del trapezoide
-
-    """
-    #Calculo de area del trapezoide y retorno del resultado
-    return ((baseM+baseMe)*altura)/constDenominador
 
 if __name__ == "__main__":
     # Declaracion de variables
-    baseM = 0
-    baseMe = 0
-    altura = 0
-    resultArea = 0
+    radio = 0
+    pi = 3.1415
+    result = 0
+    #repetir operacion
     while True:
-        #ingreso de datos por teclado
-        [baseM,baseMe,altura]=ingreso()
-        #calculo de area del trapezoide
-        resultArea=calculoDeArea(baseM,baseMe,altura)
-        #Muestra el area del trapezoide
-        print("El area del Trapezoide es {}".format(resultArea))
+        #ingreso de datos por usuario
+        radio = ingreso()
+        #calculo de area 
+        result = area(radio, pi)
+        #mostrar por pantalla resultado
+        print("El area de la circunferencia de radio {} es {}".format(radio, result))
+        #pregunta si repite si o no
         if hacerNuevamente():
             break
-
-
-

@@ -1,7 +1,3 @@
-# Definimos la constante del denominador
-constDenominador = 2
-
-
 def ingreso():
     """
     Funcion que permite pedir al usuario datos que usaremos en nuestro programa
@@ -19,9 +15,9 @@ def ingreso():
     while True:
         # permite capturar errores
         try:
-            numX = int(input("Ingrese un numero:\n"))
-            expo = int(input("Ingrese un exponente:\n"))
-            if type(numX) == int and type(expo) == int:
+            radio = int(input("Ingrese radio de la cilindro:\n"))
+            altura = int(input("Ingresa la altura del cilindro:\n"))
+            if radio > 0 and altura>0:
                 break
         # si salta un error mandamos una respuesta
         except:
@@ -30,33 +26,60 @@ def ingreso():
             print("Vuelva a ingresar")
 
     # Valida que la letra este dentro del rango
-    return numX, expo
+    return radio,altura
 
-def calcular(numX, expo):
+def hacerNuevamente():
     """
-    Funcion que permite calcular la ecuacion planteada
+    Funcion que permite saber si repetimos o no las operaciones
 
     Parametros
-    -------------------------------------------------------
-    Necesitamos un numero y un exponente
+    ----------------------------------------------------------
+    no necesitamos ningun parametro
 
-
-    Retornamos
-    ------------------------------------------------------
-    Calculamos la ecuacion y devolvemos el resultado
+    Retorna
+    ----------------------------------------------------------
+    Retorna un False si  desea repetir y un True si no quiere repetir
 
     """
-    # realizamos la ecuacio  y devolvemos el resultados
-    return (numX**expo)/constDenominador
+    # Pedimos datos que nos servira ver que opcion quiere hacer
+    opc = input("Ingresar otros Datos?\n 1.-Si\n Cualquier Tecla.-No\n")
+    # comprobamos las opciones
+    if opc == '1':
+        # retornamos un falso si desea repetir
+        return False
+    # retornamos un verdadero si no desea repetir
+    return True
+def area(radio,altura, pi):
+    """
+    Funcion que calcula el area de una cilindro
 
+    Parametro
+    --------------------------------------------------
+    Radio,altura y la contante pi 
+
+
+    Retorna
+    --------------------------------------------------
+    area de un cilindro
+    """
+    # calculamos y devolvemos el resultado
+
+    return 2*pi*radio*(radio+altura)
 
 if __name__ == "__main__":
-    # declaramos variables
-    numX = 0
-    expo = 0
-    result = 0
-    # Datos ingresados por el usuario
-    [numX, expo] = ingreso()
-    # resulato de la operacion
-    result=calcular(numX,expo)
-    print("El resultado de la operacion es ",result)
+    # Declaracion de variables
+    radio=0
+    altura=0
+    #constante universal
+    pi=3.1415
+    areaR=0
+    #repetir operacion
+    while True:
+        #ingresamos datos de usuario
+        [radio,altura]=ingreso()
+        #calculamos el area de un cilindro
+        areaR=area(radio,altura,pi)
+        print("El area del cilindro es {} ".format(areaR))
+        #pregunta si repite si o no
+        if hacerNuevamente():
+            break

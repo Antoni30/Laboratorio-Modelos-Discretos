@@ -1,110 +1,90 @@
-def ingreso(varA,varB,varC):
+def tamUsuarios():
     """
-    Funcion que permite pedir al usuario datos que usaremos en nuestro programa
+    Funcion que mide el tamanio de usuario a saludar
 
-    Parametros
-    --------------------------------------------------------------------------
-    No necesitamos ningun parametro
+    Parametro
+    --------------------------------------------------------------------
+    No necesita parametros
 
     Retorna
-    --------------------------------------------------------------------------
-    Retornamos las variables con los datos respectivos
-
+    -------------------------------------------------------------------
+    El numero de usuarios 
     """
     # Valida hasta que el numero sea correcto
     while True:
-        print("Si no conoce algun cateto o la hipotenusa colocar 0")
-        # permite capturar errores
         try:
-            # Pedimos por teclado cada uno de  los catetos
-            varA = int(
-                input("Ingresar el Cateto A:\n"))
-            varB= int(
-                input("Ingresar el Cateto B:\n"))
-            varC = int(
-                input("Ingresa la Hipotenusa:\n"))
-            #validamos la hipotenusa
-            if varC!=0:
-                #vali que todos los lados sean mayor a los numeros indicados
-                if varA>-1 and varB>-1  and varC>-1:
-                    #hipotenusa debe ser mayor a los catetos
-                    if varC>varA and varC>varB:
-                        break
-                    else:
-                        #caso contrario pediremos nuevos datos
-                        print("La hipotenusa es menor a los catetos")
-            else:
-                #vali que todos los lados sean mayor a los numeros indicados
-                if varA>-1 and varB>-1  and varC>-1:
-                    break
-        # si salta un error mandamos una respuesta
+            #pedimos datos por usuarios
+            numUsuario=int(input("Ingrese el numero de usuarios ha saludar :\n"))
+            if numUsuario>0:
+                break
         except:
-            # Mostramos informacion
+        # Mostramos informacion
             print("No es un numero alguno de los dos datos ingresados:")
             print("Vuelva a ingresar")
-    # Valida que la letra este dentro del rango
-    return varA,varB,varC
-def calcularHipotenusa(catetoA,catetoB):
+    return numUsuario
+def ingresar():
     """
-    Funcion que permite calcular la hipotenusa de un triangulo
+    Funcion que creara el nombre del usuario
 
     Parametro
-    -----------------------------------------------------------
-    Necesitamos 2 catetos 
+    -------------------------------------------------------
+    no tiene parametro
 
     Retorna
-    -----------------------------------------------------------
-    El valor de la hipotenusa
+    ------------------------------------------------------
+    nombre se usuario 
     """
-    #calculamos y devolvemos la hipotenusa
-    return ((catetoA)**2+(catetoB)**2)**(1/2)
-
-def calculoCateto(hipotenusa,cateto):
+    #creamos un usuario
+    nombreU=input("Ingresa el nombre de Usuario:\n")
+    return nombreU
+def saludoCrear():
     """
-    Funcion Que permite calcular un cateto 
+    Funcion que permite crear un saludo
 
-    Parametro
-    ---------------------------------------------------------------
-    necesitamos una hipotenusa y un cateto
+    Paramtero
+    ------------------------------------------------
+    No tienen parametros
 
     Retorna
-    ----------------------------------------------------------------
-    Devolvemos el resultado de un Cateto
+    ------------------------------------------------
+    Retorna un saludo
     """
-    #Calculamos y devolvemos un cateto
-    return ((hipotenusa)**2 - (cateto)**2)**(1/2)
+    #creamos saludo
+    saludo=input("Ingrese un saludo:\n")
+    return saludo
 
-def ladoFantante(catetoA,catetoB,hipotenusa):
+def saludarUsuario(numU,saludo):
     """
-    Funcion para buscar un lado faltante de un triangulo rectangulo
+    Funcion que permite saludar a n usuario
 
     Parametros
-    --------------------------------------------------------------
-    Lados de un triangulo rectangulo como el cateto A, B y la hipotenusa
-    
-    Retorna
-    --------------------------------------------------------------
-    Lado o hipotenusa faltante
+    -----------------------------------------------------
+    numero de Usuario y el saludo
+
+    Retorna 
+    -----------------------------------------------------
+    no retorna nada
     """
-    if catetoA!=0 and catetoB!=0:
-        #retornamos el valor de la hipotenusa
-        return "La hipotenusa es: "+str(calcularHipotenusa(catetoA,catetoB))
-    else:
-        if catetoA == 0:
-            #retornamos el valor del Cateto faltante
-            return "El cateto A es "+str(calculoCateto(hipotenusa,catetoB))
-        else:
-            #retornamos el valor del Cateto faltante
-            return "El cateto B es "+str(calculoCateto(hipotenusa,catetoB))
+    #Declaramos las variables a usar 
+    nombreU=""
+    result=""
+    #recorremos desde 0 hasata el numero de usuarios a saludar
+    for i in range(0,numU):
+        #pedimos nombre de un usuario
+        nombreU=ingresar()
+        #guardamos todos los nombres de usuarios y el saludo en una sola variable
+        result=nombreU+", "+saludo+"; "+result
+    print(result)
 
-if __name__ == "__main__":
-   #declaracion de variables
-   varA=0
-   varB=0
-   varC=0
-   #ingreso de datos deseados por el usuario
-   [varA,varB,varC]=ingreso(varA,varB,varC)
-   #Buscamos el lado faltante y lo mostramos
-   print(ladoFantante(varA,varB,varC))
 
-            
+
+
+if __name__=="__main__":
+    #Declaracion de variables
+    numU=0
+    saludo=""
+    #buscamos el numero de Usuarios
+    numU=tamUsuarios()
+    saludo=saludoCrear()
+    saludarUsuario(numU,saludo)
+

@@ -1,50 +1,59 @@
-def ingreso():
+def tamDatos():
     """
-    Funcion que permite pedir al usuario datos que usaremos en nuestro programa
+    Funcion que mide el tamanio de usuario que necesitamos
 
-    Parametros
-    --------------------------------------------------------------------------
-    No necesitamos ningun parametro
+    Parametro
+    --------------------------------------------------------------------
+    No necesita parametros
 
     Retorna
-    --------------------------------------------------------------------------
-    Retornamos las variables con los datos respectivos
-
+    -------------------------------------------------------------------
+    El numero de usuarios 
     """
     # Valida hasta que el numero sea correcto
     while True:
-        # permite capturar errores
         try:
-            radio = int(input("Ingrese radio de la circunferencia:\n"))
-            if radio > 0:
+            #pedimos datos por usuarios
+            numDatos=int(input("Ingrese el numero de datos:\n"))
+            if numDatos>0:
                 break
-        # si salta un error mandamos una respuesta
         except:
-            # Mostramos informacion
+        # Mostramos informacion
             print("No es un numero alguno de los dos datos ingresados:")
             print("Vuelva a ingresar")
+    return numDatos
 
-    # Valida que la letra este dentro del rango
-    return radio
-
-
-def area(radio, pi):
+def calcular(numDatos):
     """
-    Funcion que calcula el area de una circunferencia
+    Funcion que calcula la operaciones deseada
 
     Parametro
     --------------------------------------------------
-    Radio y la contante pi 
+    num de datos 
 
-
-    Retorna
-    --------------------------------------------------
-    area de un ciruculo
+    Retrorna
+    ----------------------------------------------------
+    el resultado de la operacion
     """
-    # calculamos y devolvemos el resultado
-
-    return pi*(radio**2)
-
+    #un acumlador
+    resul=0
+    #ingresamos los n datos
+    for i in range(0,numDatos):
+        #comporbamos que sea un numero
+        while True:
+            #manejo de errores
+            try:
+                #ingreso de datos por el usuario
+                var=int(input("Ingrese un numero:\n"))
+                expo=int(input("Ingrese el exponente del numero:\n"))
+                if type(var)==int:
+                    break
+            #salta la exepcion
+            except:
+                print("No es un numero lo ingresado")
+        #sumamos los valores
+        resul+=(var**expo)
+    return resul/2.5
 
 def hacerNuevamente():
     """
@@ -68,20 +77,19 @@ def hacerNuevamente():
     # retornamos un verdadero si no desea repetir
     return True
 
-
-if __name__ == "__main__":
-    # Declaracion de variables
-    radio = 0
-    pi = 3.1415
-    result = 0
-    #repetir operacion
+if __name__=="__main__":
+    #definimos variables
+    numDatos=0
+    resul=0
+    #reptimos los datos
     while True:
-        #ingreso de datos por usuario
-        radio = ingreso()
-        #calculo de area 
-        result = area(radio, pi)
-        #mostrar por pantalla resultado
-        print("El area de la circunferencia de radio {} es {}".format(radio, result))
-        #pregunta si repite si o no
+        #ingreso de datos
+        numDatos=tamDatos()
+        #calculo de la operacion
+        resul=calcular(numDatos)
+        #mostramos el resultado
+        print("Resultado de la Operacion es {}".format(resul))
         if hacerNuevamente():
             break
+
+

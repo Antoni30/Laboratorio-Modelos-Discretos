@@ -1,90 +1,129 @@
-def tamUsuarios():
-    """
-    Funcion que mide el tamanio de usuario a saludar
 
-    Parametro
-    --------------------------------------------------------------------
-    No necesita parametros
+# Definimos las constantes de las ecuaciones
+constC = 32
+const = 9/5
+
+
+def ingreso():
+    """
+    Funcion que permite pedir al usuario datos que usaremos en nuestro programa
+
+    Parametros
+    --------------------------------------------------------------------------
+    No necesitamos ningun parametro
 
     Retorna
-    -------------------------------------------------------------------
-    El numero de usuarios 
+    --------------------------------------------------------------------------
+    Retornamos las variables con los datos respectivos
+
     """
     # Valida hasta que el numero sea correcto
     while True:
+        # permite capturar errores
         try:
-            #pedimos datos por usuarios
-            numUsuario=int(input("Ingrese el numero de usuarios ha saludar :\n"))
-            if numUsuario>0:
+            grado = int(input("Ingresar los grados:\n"))
+            if type(grado)==int:
                 break
+        # si salta un error mandamos una respuesta
         except:
-        # Mostramos informacion
+            # Mostramos informacion
             print("No es un numero alguno de los dos datos ingresados:")
             print("Vuelva a ingresar")
-    return numUsuario
-def ingresar():
+    #Valida que la letra este dentro del rango
+    while True:
+        tipo = input(
+            "Ingresa F si es Grado Fahrenheit o C si es Celcius:\n").upper()
+        if tipo == 'C' or tipo == 'F':
+            break
+        else:
+            print("No es ninguna de las letras, Ingrese nuevamente")
+    # Retorna los datos ya ingresados por el usuario
+    return grado,tipo
+
+def celciusFahrenheit(grado):
     """
-    Funcion que creara el nombre del usuario
-
-    Parametro
-    -------------------------------------------------------
-    no tiene parametro
-
-    Retorna
+    Funcion para convertir de grados  Celcius a Fahrenheit 
+    
+    Parametros
     ------------------------------------------------------
-    nombre se usuario 
-    """
-    #creamos un usuario
-    nombreU=input("Ingresa el nombre de Usuario:\n")
-    return nombreU
-def saludoCrear():
-    """
-    Funcion que permite crear un saludo
-
-    Paramtero
-    ------------------------------------------------
-    No tienen parametros
+    el grado a transformar
 
     Retorna
-    ------------------------------------------------
-    Retorna un saludo
+    ----------------------------------------------------
+    retorna la opeacion de transformacion
     """
-    #creamos saludo
-    saludo=input("Ingrese un saludo:\n")
-    return saludo
+    #Transfroma de grado Celcius a Fahrenheit y lo devuelve
+    return (grado-constC)/const
+    
+def fahrenheitCelcius(grado):
+    """
+    Funcion para convertir de grados Fahrenheit a Celcius 
+    
+    Parametros
+    ------------------------------------------------------
+    el grado a transformar
 
-def saludarUsuario(numU,saludo):
+    Retorna
+    ----------------------------------------------------
+    retorna la opeacion de transformacion
     """
-    Funcion que permite saludar a n usuario
+    #Transfroma de grado Fahrenheit a Celcius y lo devuelve
+    return(const*grado)+32
+def transformar(grado,tipo):
+    """
+    Funcion que Transformar los grados de un tipo a otro
 
     Parametros
-    -----------------------------------------------------
-    numero de Usuario y el saludo
+    --------------------------------------------------------- 
+    Necesitamos el grado y el tipo que tenemos
 
-    Retorna 
-    -----------------------------------------------------
-    no retorna nada
+    Retorna
+    ---------------------------------------------------------
+    Retorna  la transformacion de un tipo a otro
+
     """
-    #Declaramos las variables a usar 
-    nombreU=""
-    result=""
-    #recorremos desde 0 hasata el numero de usuarios a saludar
-    for i in range(0,numU):
-        #pedimos nombre de un usuario
-        nombreU=ingresar()
-        #guardamos todos los nombres de usuarios y el saludo en una sola variable
-        result=nombreU+", "+saludo+"; "+result
-    print(result)
+    #comprueba el tipo de dato a transformar
+    if tipo=='C':
+        #retorna grados Fahrenheit 
+        return str(celciusFahrenheit(grado))+'F'
+    elif tipo=='F':
+        #retorna grados Celcius
+        return str(fahrenheitCelcius(grado))+'C'
+
+def hacerNuevamente():
+    """
+    Funcion que permite saber si repetimos o no las operaciones
+
+    Parametros
+    ----------------------------------------------------------
+    no necesitamos ningun parametro
+
+    Retorna
+    ----------------------------------------------------------
+    Retorna un False si  desea repetir y un True si no quiere repetir
+
+    """
+    # Pedimos datos que nos servira ver que opcion quiere hacer
+    opc = input("Ingresar otros Datos?\n 1.-Si\n Cualquier Tecla.-No\n")
+    # comprobamos las opciones
+    if opc == '1':
+        # retornamos un falso si desea repetir
+        return False
+    # retornamos un verdadero si no desea repetir
+    return True
 
 
-
-
-if __name__=="__main__":
-    #Declaracion de variables
-    numU=0
-    saludo=""
-    #buscamos el numero de Usuarios
-    numU=tamUsuarios()
-    saludo=saludoCrear()
-    saludarUsuario(numU,saludo)
-
+if __name__ == "__main__":
+    # Definimos las variables
+    grados = 0
+    tipo = ''
+    resul = ''
+    while True:
+        #Ingreso de datos por el usuario
+        [grados,tipo]=ingreso()
+        #transformamos de tipo de dato a otro 
+        resul=transformar(grados,tipo)
+        #mostramos los datos de la transformacion
+        print("La transformacion de {}{} es {}".format(grados,tipo,resul))
+        if hacerNuevamente():
+            break

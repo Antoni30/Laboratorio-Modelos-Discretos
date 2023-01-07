@@ -1,4 +1,4 @@
-def ingreso():
+def ingreso(varA,varB,varC):
     """
     Funcion que permite pedir al usuario datos que usaremos en nuestro programa
 
@@ -13,73 +13,98 @@ def ingreso():
     """
     # Valida hasta que el numero sea correcto
     while True:
+        print("Si no conoce algun cateto o la hipotenusa colocar 0")
         # permite capturar errores
         try:
-            radio = int(input("Ingrese radio de la cilindro:\n"))
-            altura = int(input("Ingresa la altura del cilindro:\n"))
-            if radio > 0 and altura>0:
-                break
+            # Pedimos por teclado cada uno de  los catetos
+            varA = int(
+                input("Ingresar el Cateto A:\n"))
+            varB= int(
+                input("Ingresar el Cateto B:\n"))
+            varC = int(
+                input("Ingresa la Hipotenusa:\n"))
+            #validamos la hipotenusa
+            if varC!=0:
+                #vali que todos los lados sean mayor a los numeros indicados
+                if varA>-1 and varB>-1  and varC>-1:
+                    #hipotenusa debe ser mayor a los catetos
+                    if varC>varA and varC>varB:
+                        break
+                    else:
+                        #caso contrario pediremos nuevos datos
+                        print("La hipotenusa es menor a los catetos")
+            else:
+                #vali que todos los lados sean mayor a los numeros indicados
+                if varA>-1 and varB>-1  and varC>-1:
+                    break
         # si salta un error mandamos una respuesta
         except:
             # Mostramos informacion
             print("No es un numero alguno de los dos datos ingresados:")
             print("Vuelva a ingresar")
-
     # Valida que la letra este dentro del rango
-    return radio,altura
-
-def hacerNuevamente():
+    return varA,varB,varC
+def calcularHipotenusa(catetoA,catetoB):
     """
-    Funcion que permite saber si repetimos o no las operaciones
-
-    Parametros
-    ----------------------------------------------------------
-    no necesitamos ningun parametro
-
-    Retorna
-    ----------------------------------------------------------
-    Retorna un False si  desea repetir y un True si no quiere repetir
-
-    """
-    # Pedimos datos que nos servira ver que opcion quiere hacer
-    opc = input("Ingresar otros Datos?\n 1.-Si\n Cualquier Tecla.-No\n")
-    # comprobamos las opciones
-    if opc == '1':
-        # retornamos un falso si desea repetir
-        return False
-    # retornamos un verdadero si no desea repetir
-    return True
-def area(radio,altura, pi):
-    """
-    Funcion que calcula el area de una cilindro
+    Funcion que permite calcular la hipotenusa de un triangulo
 
     Parametro
-    --------------------------------------------------
-    Radio,altura y la contante pi 
-
+    -----------------------------------------------------------
+    Necesitamos 2 catetos 
 
     Retorna
-    --------------------------------------------------
-    area de un cilindro
+    -----------------------------------------------------------
+    El valor de la hipotenusa
     """
-    # calculamos y devolvemos el resultado
+    #calculamos y devolvemos la hipotenusa
+    return ((catetoA)**2+(catetoB)**2)**(1/2)
 
-    return 2*pi*radio*(radio+altura)
+def calculoCateto(hipotenusa,cateto):
+    """
+    Funcion Que permite calcular un cateto 
+
+    Parametro
+    ---------------------------------------------------------------
+    necesitamos una hipotenusa y un cateto
+
+    Retorna
+    ----------------------------------------------------------------
+    Devolvemos el resultado de un Cateto
+    """
+    #Calculamos y devolvemos un cateto
+    return ((hipotenusa)**2 - (cateto)**2)**(1/2)
+
+def ladoFantante(catetoA,catetoB,hipotenusa):
+    """
+    Funcion para buscar un lado faltante de un triangulo rectangulo
+
+    Parametros
+    --------------------------------------------------------------
+    Lados de un triangulo rectangulo como el cateto A, B y la hipotenusa
+    
+    Retorna
+    --------------------------------------------------------------
+    Lado o hipotenusa faltante
+    """
+    if catetoA!=0 and catetoB!=0:
+        #retornamos el valor de la hipotenusa
+        return "La hipotenusa es: "+str(calcularHipotenusa(catetoA,catetoB))
+    else:
+        if catetoA == 0:
+            #retornamos el valor del Cateto faltante
+            return "El cateto A es "+str(calculoCateto(hipotenusa,catetoB))
+        else:
+            #retornamos el valor del Cateto faltante
+            return "El cateto B es "+str(calculoCateto(hipotenusa,catetoA))
 
 if __name__ == "__main__":
-    # Declaracion de variables
-    radio=0
-    altura=0
-    #constante universal
-    pi=3.1415
-    areaR=0
-    #repetir operacion
-    while True:
-        #ingresamos datos de usuario
-        [radio,altura]=ingreso()
-        #calculamos el area de un cilindro
-        areaR=area(radio,altura,pi)
-        print("El area del cilindro es {} ".format(areaR))
-        #pregunta si repite si o no
-        if hacerNuevamente():
-            break
+   #declaracion de variables
+   varA=0
+   varB=0
+   varC=0
+   #ingreso de datos deseados por el usuario
+   [varA,varB,varC]=ingreso(varA,varB,varC)
+   #Buscamos el lado faltante y lo mostramos
+   print(ladoFantante(varA,varB,varC))
+
+            

@@ -1,4 +1,4 @@
-def tamDatos():
+def materias():
     """
       Funcion que permite pedir al usuario datos que usaremos en nuestro programa
       Parametros
@@ -13,144 +13,107 @@ def tamDatos():
         # permite capturar errores
         try:
             #Datos ingresados por el usuario
-            numDatos=int(input("Ingrese el numero datos:\n"))
-            if type(numDatos)==int:
+            numMaterias=int(input("Ingrese el numero de materias:\n"))
+            if numMaterias>0:
                 break
+            else:
+                print("datos esta fuera de los rangos establecidos")
             # si salta un error mandamos una respuesta
         except:
             # Mostramos informacion
-            print("No es un numero")
+            print("No es un numero alguno de los dos datos ingresados:")
             print("Vuelva a ingresar")
         # Retorna los datos ya ingresados por el usuario
-    return numDatos
+    return numMaterias
 
-def ingresoDatos(numDatos):
+def notasMateria(numMaterias):
     """
-    Funcion que recoge datos
+    Funcion que permite ingresar notas de la materias 
 
-    Parametros
-    --------------------------------------------------
-    el numero de datos
+    Parametro
+    -----------------------------------------------
+    numero de materias
 
     Retorna
-    ----------------------------------------------
-    Datos
+    -----------------------------------------------
+    el total de las notas 
     """
-    datos=[]
-    dato=0
-    #pedimos los  n datos
-    for i in range(0,numDatos):
-        #validacion del dato
-        while True:
-            #captura de errores
-            try:
-                #ingreso del dato
-                dato=int(input("Ingresa el dato {}\n".format(i+1)))
-                #si es un entero salgo de la comprobacion
-                if type(dato)==int:
-                    break
-            except:
-                print("No es un numero")
-        #agregamos al arreglo
-        datos.append(dato)
-    #retornamos los valores
-    return datos
-
-def calSuma(datos):
-    """
-    Funcion que calcula la suma de todos los datos
-
-    Parametros
-    -----------------------------------------------------
-    el arreglo de datos
-
-    Retorna
-    ----------------------------------------------------
-    la suma de datos 
-    """
-    #definimos un acumulador
+    #acumalador de notas
     acum=0
-    #recorremos nuestro arreglo
-    for dato in datos:
-        #sumamos los datos
-        acum+=dato
-    #retornamos la suma de los datos 
+    #ingreso de nota de materia
+    for i in range(0,numMaterias):
+        #compueba si cumple que es un numero
+        while True:
+            #control de error
+            try:
+                #ingreso de datos
+                nota=int(input("Ingrese la nota de la materia {}:\n".format(i+1)))
+                #validacion de rango de nota
+                if nota>0 and nota<=20:
+                    break
+                else:
+                    print("Nota fuera de rango")
+            except:
+                print("No es un numero el dato ingresado")
+        #suma de todas las notas 
+        acum+=nota
+    #retorna el total de la suma de notas
     return acum
 
-def calResta(datos):
+def calPromedio(total,numMateria):
     """
-    Funcion que calcula la resta de todos los datos
+    Funcion que calcula el promedio de materias 
 
-    Parametros
-    -----------------------------------------------------
-    el arreglo de datos
+    Parametro
+    ---------------------------------------------------
+    la suma total de las materias y el numero de materias
 
     Retorna
-    ----------------------------------------------------
-    la resta de datos 
+    --------------------------------------------------
+    el promedio
     """
-    #definimos un acumulador
-    acum=datos[0]
-    #recorremos nuestro arreglo
-    for i in range(1,len(datos)):
-        #resta los datos
-        acum=acum-datos[i]
-    #retornamos la resta de los datos 
-    return acum
+    #calculo y devuelve el promedio
+    return total/numMateria
 
-def calMul(datos):
+def calPorcentaje(promedio):
     """
-    Funcion que calcula la multiplicacion de todos los datos
+    Funcion que calcula el porcentaje de materias 
 
-    Parametros
-    -----------------------------------------------------
-    el arreglo de datos
+    Parametro
+    ---------------------------------------------------
+    promedio que posee el estudiante
 
     Retorna
-    ----------------------------------------------------
-    la multiplicacion de datos 
+    --------------------------------------------------
+    el porentaje que tiene
     """
-    #definimos un acumulador
-    acum=1
-    #recorremos nuestro arreglo
-    for dato in datos:
-        #multiplicamos los datos
-        acum*=dato
-    #retornamos la suma de los datos 
-    return acum
-def calDiv(datos):
+    #calculo y devuelve el porcentaje
+    return (promedio*100)/20
+
+def mostrar(total,promedio,porcentaje):
     """
-    Funcion que calcula la divicion de todos los datos
+    Funcion para que muestre los resultados
 
     Parametros
-    -----------------------------------------------------
-    el arreglo de datos
+    -----------------------------------------------
+    el total de las notas, el promedio y el porcentaje
 
     Retorna
-    ----------------------------------------------------
-    la divicion de datos 
+    --------------------------------------------------
+    no retorna
     """
-    #definimos un acumulador
-    acum=datos[0]
-    #recorremos nuestro arreglo
-    for i in range(1,len(datos)):
-        #divicion los datos
-        acum/=datos[i]
-    #retornamos la suma de los datos 
-    return acum
+    print("La suma de todas las notas es {}, y el promedio es {} dando un porcentaje de {}%".format(total,promedio,porcentaje))
+
 def hacerNuevamente():
     """
-    Funcion que permite saber si repetimos o no las operaciones
-
-    Parametros
-    ----------------------------------------------------------
-    no necesitamos ningun parametro
-
-    Retorna
-    ----------------------------------------------------------
-    Retorna un False si  desea repetir y un True si no quiere repetir
-
-    """
+      Funcion que permite saber si repetimos o no las operaciones
+      Parametros
+      ----------------------------------------------------------
+      no necesitamos ningun parametro
+      Retorna
+      ----------------------------------------------------------
+      Retorna un False si  desea repetir y un True si no quiere repetir
+      """
     # Pedimos datos que nos servira ver que opcion quiere hacer
     opc = input("Ingresar otros Datos?\n 1.-Si\n Cualquier Tecla.-No\n")
     # comprobamos las opciones
@@ -159,33 +122,25 @@ def hacerNuevamente():
         return False
     # retornamos un verdadero si no desea repetir
     return True
+
 if __name__ == "__main__":
     # Definimos variables
-    numDatos=0
-    datos=[]
-    suma=0
-    resta=0
-    multiplicacion=0
-    divicion=0
+    numMaterias=0
+    total=0
+    promedio=0
+    porcentaje=0
+    #repetir operacion
     while True:
-        #ingresos de numero de datos
-        numDatos=tamDatos()
-        #ingresos de datos
-        datos=ingresoDatos(numDatos)
-        #operacion Suma
-        suma=calSuma(datos)
-        #operacion resta
-        resta=calResta(datos)
-        #operacion multiplicacion
-        multiplicacion=calMul(datos)
-        #operacion divicion
-        divicion=calDiv(datos)
-        #Los prints muestan los operaciones
-        print("Los datos son ",datos)
-        print("La suma de datos es ",suma)
-        print("La resta de datos es ",resta)
-        print("La multiplicacion de datos es ",multiplicacion)
-        print("La Divicion de datos es ",divicion)
+        #el numero de materias
+        numMaterias=materias()
+        #la suma de todas las notas
+        total=notasMateria(numMaterias)
+        #promedio
+        promedio=calPromedio(total,numMaterias)
+        #porcentaje que tiene el estudiante
+        porcentaje=calPorcentaje(promedio)
+        #muestra en pantalla los resultados
+        mostrar(total,promedio,porcentaje)
+        #preguntrar si repetir la operacion
         if hacerNuevamente():
             break
-

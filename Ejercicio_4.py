@@ -1,3 +1,6 @@
+#definimos el constante denominador de la ecuacion
+constDenominador=2
+
 def ingreso():
     """
     Funcion que permite pedir al usuario datos que usaremos en nuestro programa
@@ -15,35 +18,28 @@ def ingreso():
     while True:
         # permite capturar errores
         try:
-            expoR = int(input("Ingrese el exponente de la Raiz:\n"))
-            expo = int(input("Ingrese el exponente:\n"))
-            vara = int(input("Ingrese el valor de A:\n"))
-            varb = int(input("Ingrese el valor de B:\n"))
-            varc = int(input("Ingrese el valor de C:\n"))
-            if ((varb**expo)+varc)>0:
+            # Pedimos por teclado la base mayor, base menor y la altura
+            baseM = int(
+                input("Ingresar Base Mayor del  trapezoide:\n"))
+            baseMe = int(
+                input("Ingresar Base Menor del trapezoide:\n"))
+            altura = int(
+                input("Ingresar la altura del trapezoide:\n"))
+
+            if baseM > 0 and baseMe > 0 and altura > 0:
                 break
+            else:
+                print(
+                    "Algunos de los datos ingresados son menores a 0. Ingrese nuevamente los valores ")
         # si salta un error mandamos una respuesta
         except:
             # Mostramos informacion
             print("No es un numero alguno de los dos datos ingresados:")
             print("Vuelva a ingresar")
-
     # Valida que la letra este dentro del rango
-    return expoR,expo,vara,varb,varc
+    return baseM, baseMe, altura
 
-def calcular(expoR,expo,vara,varb,varc):
-    """
-    Funcion que calcula la operacion
 
-    Parametro
-    ---------------------------------------------
-    El exponente de la raiz, de la variable b, variable A , variable B y varible C:
-
-    Retorna
-    -----------------------------------------------
-    el resultado de la operacion
-    """
-    return ((-varb+((varb)**expo)+varc)**expoR)/expo*vara
 def hacerNuevamente():
     """
     Funcion que permite saber si repetimos o no las operaciones
@@ -65,21 +61,38 @@ def hacerNuevamente():
         return False
     # retornamos un verdadero si no desea repetir
     return True
+
+def calculoDeArea(baseM,baseMe,altura):
+    """
+    Funcion que alcual el area de un trapezoide
+
+    Parametros
+    -------------------------------------------------------
+    Base Mayor, Base Menor y la altura de un trapezoide
+
+    Retorna
+    --------------------------------------------------------
+    Retorna el area del trapezoide
+
+    """
+    #Calculo de area del trapezoide y retorno del resultado
+    return ((baseM+baseMe)*altura)/constDenominador
+
 if __name__ == "__main__":
     # Declaracion de variables
-    expoR=0
-    varb=0
-    varc=0
-    vara=0
-    resul=0
-    #repetir la operacion
+    baseM = 0
+    baseMe = 0
+    altura = 0
+    resultArea = 0
     while True:
-        #ingreso de datos por usuario
-        [expoR,expo,vara,varb,varc]=ingreso()
-        #calculo de operaciones
-        resul=calcular(expoR,expo,vara,varb,varc)
-        #mostramos por pantalla
-        print("El resultado de la operacion es {}".format(resul))
-        #preuntar si se repite la operacion
+        #ingreso de datos por teclado
+        [baseM,baseMe,altura]=ingreso()
+        #calculo de area del trapezoide
+        resultArea=calculoDeArea(baseM,baseMe,altura)
+        #Muestra el area del trapezoide
+        print("El area del Trapezoide es {}".format(resultArea))
         if hacerNuevamente():
             break
+
+
+

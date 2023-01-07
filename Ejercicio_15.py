@@ -4,7 +4,7 @@ def ingreso():
 
     Parametros
     --------------------------------------------------------------------------
-    No necesitamos ningun parametro
+    No necesitamos ningun parametro 
 
     Retorna
     --------------------------------------------------------------------------
@@ -15,92 +15,37 @@ def ingreso():
     while True:
         # permite capturar errores
         try:
-            numVariables = int(input("Ingrese el numero de variables existentes en la Operacion:\n"))
-            if numVariables > 0:
-                break
+            # pedimos el exponente
+            exponente = int(input("Ingrese el exponente:\n"))
+            # pedimos el numero
+            numero = int(input("Ingrese el numero:\n"))
+            if exponente==0:
+                return numero, exponente
         # si salta un error mandamos una respuesta
         except:
             # Mostramos informacion
             print("No es un numero alguno de los dos datos ingresados:")
             print("Vuelva a ingresar")
+        if exponente!=0 and numero!=0:
+            break
+    # Retorna los datos ya ingresados por el usuario
+    return numero, exponente
 
-    # Valida que la letra este dentro del rango
-    return numVariables
-
-
-def nuevaOperacion():
+def evevadoA_N(varX,expo):
     """
-    Funcion que pedirar al usauario una operacion matematica que resolver 
+    Funcion que calcula un numero elevado a n exponente
 
-    Parametro
-    ------------------------------------------------------------
-    Ningun parametro
+    Parametros
+    ----------------------------------------------------------------
+    necesitamos una variable x que representara al numero y un exponente al que se va a elevar
 
     Retorna
-    ---------------------------------------------------------
-    una operacion 
+    -----------------------------------------------------------------
+    El resultado de la operacion
+
     """
-    #pedir al usuario por teclado la operacion
-    operacion=input("Ingrese una operacion matematica a resolver:\n")
-
-    #retornamos la operacion
-
-    return operacion
-
-
-def definirValores(numIcognitas):
-    """
-    Funcion que definine  valores a las incognitas
-
-    Parametro
-    ---------------------------------------------------
-    numero de incognitas
-
-    Retorna
-    ---------------------------------------------------
-    Diccionarion con incognitas y valores
-    """
-    #definimos variables
-    incognitas={}
-    incognita=""
-    valor=0
-    #recorrido para obtener las n ingnitas con sus valores
-    for i in range(0,numIcognitas):
-        #incognitas  que selecione el usuario
-        incognita=input("Ingrese la incognita {}:\n".format(i+1))
-        #si tiene  un error repite
-        while True:
-            #validacion de que sea un numero
-            try:
-                #valor de las incognitas 
-                valor=int(input("Ingresa el valor de la incognita {}:\n".format(incognita)))
-                if valor >0:
-                    break
-            except:
-                print("No es un numero, Ingresa un Numero ")
-        #guardar el valor en el el diccionario
-        incognitas[incognita]=valor
-    #Retornamos dicicionario
-    return incognitas
-    
-def calcular(operacion, incognitas):
-    """
-    Funcion que permite calcular la operaciones
-
-    Parametro
-    ---------------------------------------------
-    La operacion a tratar, las incognitas con su valor y en num de incognitas
-
-    Retorna
-    ------------------------------------------------
-    retorna el valor 
-    """
-    nuevaOperacion=""
-    for clave in incognitas:
-        nuevaOperacion = operacion.replace(clave,str(incognitas[clave]))
-    #retorna el resultado de la operacion
-    return eval(nuevaOperacion)
-
+    #retornamos la operacion 
+    return varX**expo
 def hacerNuevamente():
     """
     Funcion que permite saber si repetimos o no las operaciones
@@ -124,25 +69,17 @@ def hacerNuevamente():
     return True
 
 if __name__ == "__main__":
-    #decleracion de variables
-    numIncognitas=0
-    operacion=""
+    #Declaramos Variables
+    varX=0
+    expo=0
     result=0
-    incognitas={}
-    #repetir  la operacion
     while True:
-        #pedimos la Operacion
-        operacion=nuevaOperacion()
-        #numero de variables en la operacion
-        numIncognitas=ingreso()
-        #incognitas con los valores
-        incognitas=definirValores(numIncognitas)
-        #Calculo de las operaciones 
-        result=calcular(operacion,incognitas)
-        print("El resultado de la Operacion es {}".format(result))
-        #pregunta si repite las operaciones
+        #Ingreso de datos  por el usuario
+        [varX,expo]=ingreso()
+        #Usamos la funcion que  realizara el calculo
+        result=evevadoA_N(varX,expo)
+        #imprimimos el resultado
+        print("El numero {} elevado a {} es {}".format(varX,expo,result))
         if hacerNuevamente():
             break
-
-
     
